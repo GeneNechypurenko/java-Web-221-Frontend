@@ -3,9 +3,10 @@ import { useState } from "react";
 
 function App() {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [emails, setEmails] = useState([""]);
   const [login, setLogin] = useState("");
   const [city, setCity] = useState("");
+  const [phones, setPhones] = useState([""]);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [birthDate, setBirthDate] = useState("");
@@ -14,12 +15,27 @@ function App() {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
+  const handleAddEmail = () => setEmails([...emails, ""]);
+  const handleEmailChange = (index, value) => {
+    const newEmails = [...emails];
+    newEmails[index] = value;
+    setEmails(newEmails);
+  };
+
+  const handleAddPhone = () => setPhones([...phones, ""]);
+  const handlePhoneChange = (index, value) => {
+    const newPhones = [...phones];
+    newPhones[index] = value;
+    setPhones(newPhones);
+  };
+
   const handleSendForm = () => {
     if (
       !name ||
-      !email ||
+      emails.some((email) => !email) ||
       !login ||
       !city ||
+      phones.some((phone) => !phone) ||
       !password ||
       !confirmPassword ||
       !birthDate
@@ -28,8 +44,8 @@ function App() {
       return;
     }
 
-    if (!emailRegex.test(email)) {
-      setError("Invalid email format.");
+    if (emails.some((email) => !emailRegex.test(email))) {
+      setError("One or more emails are invalid.");
       return;
     }
 
@@ -46,7 +62,7 @@ function App() {
     }
 
     setError("");
-    const data = { name, email, login, city, password, birthDate };
+    const data = { name, emails, login, city, phones, password, birthDate };
 
     fetch("http://localhost:8080/Java_Web_221_war/home", {
       method: "POST",
@@ -81,18 +97,32 @@ function App() {
         onChange={(e) => setLogin(e.target.value)}
         placeholder="Enter your login"
       />
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter your email"
-      />
+      {emails.map((email, index) => (
+        <input
+          key={index}
+          type="email"
+          value={email}
+          onChange={(e) => handleEmailChange(index, e.target.value)}
+          placeholder="Enter your email"
+        />
+      ))}
+      <button onClick={handleAddEmail}>Add Email</button>
       <input
         type="text"
         value={city}
         onChange={(e) => setCity(e.target.value)}
         placeholder="Enter your city"
       />
+      {phones.map((phone, index) => (
+        <input
+          key={index}
+          type="text"
+          value={phone}
+          onChange={(e) => handlePhoneChange(index, e.target.value)}
+          placeholder="Enter your phone number"
+        />
+      ))}
+      <button onClick={handleAddPhone}>Add Phone</button>
       <input
         type="date"
         value={birthDate}

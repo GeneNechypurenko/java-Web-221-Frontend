@@ -9,10 +9,19 @@ export default function Signup() {
   const [isActive, setIsActive] = useState(false);
   const [balance, setBalance] = useState("");
   const [birthDate, setBirthDate] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleSendForm = () => {
-    if (!name || !email || !phone || !age || !balance || !birthDate) {
+    if (
+      !name ||
+      !email ||
+      !password ||
+      !phone ||
+      !age ||
+      !balance ||
+      !birthDate
+    ) {
       setError("All fields are required.");
       return;
     }
@@ -31,6 +40,7 @@ export default function Signup() {
     const data = {
       name,
       email,
+      password,
       phone,
       age: parseInt(age),
       isActive,
@@ -70,6 +80,12 @@ export default function Signup() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter your email"
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Enter your password"
       />
       <input
         type="text"

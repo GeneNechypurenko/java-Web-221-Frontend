@@ -15,23 +15,59 @@ export default function Profile() {
 }
 
 function AuthView() {
-  const { user } = useContext(AppContext);
+  const { user, setUser, request, accessToken, setAccessToken } =
+    useContext(AppContext);
   const [name, setName] = useState(user.name);
   const [phone, setPhone] = useState(user.phone);
   const [age, setAge] = useState(user.age);
   const [balance, setBalance] = useState(user.balance);
   const [birthDate, setBirthDate] = useState(user.birthDate);
   const [isActive, setIsActive] = useState(user.isActive);
+  const [email, setEmail] = useState(user.email);
 
   const handleSaveChanges = () => {
-    console.log(user.userId, name, phone);
+    request("/user", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: user.userId,
+        name,
+        email,
+        phone,
+        age,
+        balance,
+        birthDate,
+        isActive,
+      }),
+    })
+      .then((data) => {
+        console.log(data);
+        setUser(data);
+      })
+      .catch((e) => console.log(e));
   };
+
   const handleDeleteProfile = () => {
+    if (window.confirm("Are you sure you want to delete your profile?")) {
+      request("/user?id=" + user.userId, {
+        method: "DELETE",
+      })
+        .then((data) => {
+          console.log(data);
+          setUser(null);
+          setUser(null);
+        })
+        .catch((e) => console.log(e));
+    }
     console.log(user.userId, " profile deleted");
   };
 
   return (
     <>
+      <i>{JSON.stringify(accessToken)}</i>
+      <br />
       User Name:{" "}
       <input
         type="text"
@@ -40,7 +76,13 @@ function AuthView() {
         placeholder="Enter your name"
       />
       <br />
-      User Email: {user.email}
+      Email:{" "}
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Enter your email"
+      />
       <br />
       Phone Number:{" "}
       <input

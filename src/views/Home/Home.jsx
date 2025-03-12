@@ -10,6 +10,9 @@ export default function Home() {
       <br />
       <br />
       <Link to={"/profile"}>Profile</Link>
+      <br />
+      <br />
+      <Link to={"/admin"}>Admin</Link>
     </div>
   );
 }

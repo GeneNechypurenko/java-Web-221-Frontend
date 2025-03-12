@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function Signin() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const { user, setUser, request } = useContext(AppContext);
+  const { setUser, request, setAccessToken } = useContext(AppContext);
   const navigate = useNavigate();
 
   const handleSendForm = () => {
@@ -22,7 +22,9 @@ export default function Signin() {
       },
     })
       .then((data) => {
-        setUser(data);
+        setUser(data.user);
+        setAccessToken(data.accessToken);
+        // setAccessToken(data.jwtToken);
         navigate("/profile");
       })
       .catch((e) => console.log(e));

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import AppContext from "../../AppContext";
 import "./Category.css";
@@ -40,10 +40,29 @@ export default function Category() {
 }
 
 function ProductCard({ product }) {
+  const { accessToken, request } = useContext(AppContext);
+  const navigate = useNavigate();
+
   const handleCardClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log("ProductCard: ", product.productTitle);
+    if (!accessToken) {
+      if (confirm("Please sign in to add to cart")) {
+        navigate("/signin");
+      }
+      return;
+    }
+    console.log("ProductCard: ", product.productId);
+
+    request("/cart", {
+      method: "POST",
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      body: "productId=" + product.productId,
+    })
+      .then(console.log)
+      .catch(console.error());
   };
 
   return (

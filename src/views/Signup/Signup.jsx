@@ -65,8 +65,11 @@ export default function Signup() {
       style={{
         display: "flex",
         flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
         gap: "4px",
         width: "400px",
+        height: "100%",
       }}
     >
       <input

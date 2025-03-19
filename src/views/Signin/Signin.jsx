@@ -32,7 +32,17 @@ export default function Signin() {
   };
 
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "4px",
+        width: "400px",
+        height: "100%",
+      }}
+    >
       <input
         type="email"
         placeholder="Enter your login"
@@ -51,6 +61,6 @@ export default function Signin() {
       <br />
       <br />
       <Link to={"/"}>Home</Link>
-    </>
+    </div>
   );
 }

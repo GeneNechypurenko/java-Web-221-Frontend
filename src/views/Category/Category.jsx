@@ -24,7 +24,7 @@ export default function Category() {
 
   return (
     <>
-      <h1>Category {id}</h1>
+      <h1>{category.categoryTitle}</h1>
       <br />
       <br />
       <div className="products">

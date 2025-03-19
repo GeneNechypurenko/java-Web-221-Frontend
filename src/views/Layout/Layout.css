@@ -37,7 +37,7 @@ aside {
     flex-direction: column;
     justify-content: space-between;
     align-items: start;
-    width: 14%;
+    width: 20%;
     height: 100%;
     background-color: #353535;
     color: #fff;
@@ -45,7 +45,7 @@ aside {
 }
 
 main {
-    width: 86%;
+    width: 80%;
     height: 100%;
     display: flex;
     flex-direction: column;

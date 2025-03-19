@@ -77,7 +77,7 @@ export default function Layout() {
           <nav className="breadcrumbs">
             {breadcrumbs.map((bc, index) => (
               <span key={bc.url}>
-                {index > 0 && " / "}
+                {index > 0 && " > "}
                 <Link to={bc.url}>{bc.name}</Link>
               </span>
             ))}

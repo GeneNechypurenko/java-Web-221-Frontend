@@ -7,10 +7,15 @@ import Signin from "./views/Signin/Signin";
 import AppContext from "./AppContext";
 import Profile from "./views/Profile/Profile";
 import Admin from "./views/Admin/Admin";
+import Category from "./views/Category/Category";
+import Shop from "./views/Shop/Shop";
+import Layout from "./views/Layout/Layout";
+import Product from "./views/Product/Product";
 
 function App() {
   const [user, setUser] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
+  const [cart, setCart] = useState(null);
 
   const request = (url, conf) =>
     new Promise((resolve, reject) => {
@@ -45,15 +50,28 @@ function App() {
 
   return (
     <AppContext.Provider
-      value={{ user, setUser, request, accessToken, setAccessToken }}
+      value={{
+        user,
+        setUser,
+        cart,
+        setCart,
+        accessToken,
+        setAccessToken,
+        request,
+      }}
     >
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/signin" element={<Signin />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/category/:id" element={<Category />} />
+            <Route path="/product/:id" element={<Product />} />
+          </Route>
         </Routes>
       </Router>
     </AppContext.Provider>

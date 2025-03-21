@@ -40,7 +40,7 @@ export default function Category() {
 }
 
 function ProductCard({ product }) {
-  const { accessToken, request } = useContext(AppContext);
+  const { accessToken, setCart, request } = useContext(AppContext);
   const navigate = useNavigate();
 
   const handleCardClick = (e) => {
@@ -61,7 +61,7 @@ function ProductCard({ product }) {
       },
       body: "productId=" + product.productId,
     })
-      .then(console.log)
+      .then(setCart)
       .catch(console.error());
   };
 

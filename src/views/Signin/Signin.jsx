@@ -7,8 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function Signin() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const { setUser, request, setAccessToken, setCart, setCartItems } =
-    useContext(AppContext);
+  const { setUser, request, setAccessToken, setCart } = useContext(AppContext);
   const navigate = useNavigate();
 
   const handleSendForm = () => {
@@ -25,7 +24,6 @@ export default function Signin() {
       .then((data) => {
         setUser(data.user);
         setCart(data.cart);
-        setCartItems(data.cartItems);
         setAccessToken(data.accessToken);
         // setAccessToken(data.jwtToken);
         navigate("/profile");

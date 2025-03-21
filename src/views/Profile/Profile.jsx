@@ -65,9 +65,18 @@ function AuthView() {
   };
 
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "4px",
+        width: "800px",
+        height: "100%",
+      }}
+    >
       <i>{JSON.stringify(accessToken)}</i>
-      <br />
       User Name:{" "}
       <input
         type="text"
@@ -75,7 +84,6 @@ function AuthView() {
         onChange={(e) => setName(e.target.value)}
         placeholder="Enter your name"
       />
-      <br />
       Email:{" "}
       <input
         type="email"
@@ -83,7 +91,6 @@ function AuthView() {
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter your email"
       />
-      <br />
       Phone Number:{" "}
       <input
         type="text"
@@ -91,7 +98,6 @@ function AuthView() {
         onChange={(e) => setPhone(e.target.value)}
         placeholder="Enter your phone number"
       />
-      <br />
       Age:{" "}
       <input
         type="number"
@@ -99,7 +105,6 @@ function AuthView() {
         onChange={(e) => setAge(e.target.value)}
         placeholder="Enter your age"
       />
-      <br />
       Balance:{" "}
       <input
         type="number"
@@ -107,14 +112,12 @@ function AuthView() {
         onChange={(e) => setBalance(e.target.value)}
         placeholder="Enter your balance"
       />
-      <br />
       Birth Date:{" "}
       <input
         type="date"
         value={birthDate}
         onChange={(e) => setBirthDate(e.target.value)}
       />
-      <br />
       <label>
         <input
           type="checkbox"
@@ -127,7 +130,7 @@ function AuthView() {
       <br />
       <button onClick={handleSaveChanges}>SAVE CHANGES</button>
       <button onClick={handleDeleteProfile}>DELETE PROFILE</button>
-    </>
+    </div>
   );
 }
 

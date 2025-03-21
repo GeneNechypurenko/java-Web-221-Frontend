@@ -16,6 +16,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
   const [cart, setCart] = useState(null);
+  const [cartItems, setCartItems] = useState([]);
 
   const request = (url, conf) =>
     new Promise((resolve, reject) => {
@@ -55,6 +56,8 @@ function App() {
         setUser,
         cart,
         setCart,
+        cartItems,
+        setCartItems,
         accessToken,
         setAccessToken,
         request,
